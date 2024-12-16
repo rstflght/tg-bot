@@ -1,3 +1,4 @@
+# 1.Импорт библиотек
 import logging
 import os
 from datetime import datetime
@@ -6,10 +7,10 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters.command import Command
 
-# Make folder for log if mot exists
+
+# 2. Инициализация объектов
 if not os.path.exists("./log"):
     os.makedirs("./log")
-
 
 TOKEN = os.getenv('TOKEN')
 bot = Bot(token=TOKEN)
@@ -19,6 +20,7 @@ logging.basicConfig(
     filename = "./log/translit_bot.log"
     )
 
+# 3. Обработка/Хэндлер на команду /start
 @dp.message(Command(commands=['start']))
 async def proccess_command_start(message: Message):
     user_name = message.from_user.full_name
@@ -37,7 +39,7 @@ async def send_echo(message: Message):
     await message.answer(text=text)
 
 
-# traslit phrase
+# 5. Обработка сообщения пользователя / возврат фразы транслитом
 def translit(phrase: str) -> str:
 
     trans_dict = {
@@ -87,6 +89,6 @@ def translit(phrase: str) -> str:
 
     return back_phrase
 
-# 5. Запуск процесса пуллинга
+# 6. Запуск процесса пуллинга
 if __name__ == '__main__':
     dp.run_polling(bot)
