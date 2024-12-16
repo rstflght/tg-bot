@@ -72,6 +72,7 @@ def translit(phrase: str) -> str:
     "щ": "shch",
     "ы": "y",
     "ъ": "ie",
+    "ь": "",
     "э": "e",
     "ю": "iu",
     "я": "ia"
